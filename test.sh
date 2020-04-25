@@ -1,4 +1,6 @@
 #!/usr/bin/env zsh
 
-echo "this is values"
-echo "${ZSH}"
+plugins=(git z)
+sed -i "s/plugins=(${plugins})/plugins=(${plugins} newplug)/" test.txt
+plugins+=(newplug)
+sed -i "s/plugins=(${plugins})/plugins=(${plugins} 2ndplug)/" test.txt
