@@ -1,6 +1,6 @@
-#!/usr/bin/env zsh
+#!/bin/bash
 echo "Programs to be installed:"
-programs=("speedtest" "tools")
+programs=("speedtest" "tools" "zsh")
 for program in ${programs[@]}; do
     echo "->${program}"
 done
@@ -10,7 +10,7 @@ sudo apt upgrade -y
 
 # --install tools --
 inst_tools(){
-    sudo apt install tmux neofetch -y    
+    sudo apt install tmux neofetch sed -y    
 }
 # --install speedtest --
 inst_speedtest(){
@@ -23,6 +23,13 @@ inst_speedtest(){
     echo "deb https://ookla.bintray.com/debian ${DEB_DISTRO} main" | sudo tee  /etc/apt/sources.list.d/speedtest.list
     sudo apt update
     sudo apt install speedtest -y
+}
+inst_zsh(){
+    sudo apt install zsh -y
+    chsh -s $(which zsh)
+    # install OhMyZsh
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
 }
 # -- Main Program --
 for program in ${programs[@]}; do
